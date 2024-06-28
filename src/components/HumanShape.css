@@ -27,14 +27,6 @@
   grid-template-rows: repeat(3, 1fr);
 }
 
-.grid-button {
-  border: none;
-}
-
 .button-4, .button-5, .button-6, .button-8 {
   cursor: pointer;
-}
-
-.button-4:hover, .button-5:hover, .button-6:hover, .button-8:hover {
-  border: none;
 }
