@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 
-const pages = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
+const pages = ['Home', 'Mypage'];
 
 function Navigation() {
   return (
@@ -43,7 +43,7 @@ function Navigation() {
               </Button>
             ))}
           </Box>
-          <Link to="/login" style={{ textDecoration: 'none' }}>
+          <Link to="/signin" style={{ textDecoration: 'none' }}>
             <Button variant="outlined" sx={{ color: 'white', borderColor: 'white', mr: 2 }}>
               Login
             </Button>
