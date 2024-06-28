@@ -34,7 +34,7 @@ const MainPage = () => {
   };
 
   return (
-    <div className="main-page">
+    <div className="HumanShape">
       <div className="image-container">
         <img src={getButtonImage()} alt="Body" className="body-image" />
         <div className="button-grid">
