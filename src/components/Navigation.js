@@ -44,15 +44,19 @@ function Navigation() {
       onClick={toggleDrawer}
     >
       <List>
-        {['Arms', 'Abs', 'Legs'].map((text) => (
+        {['MyPage', '팔', '배', '하체'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton component={Link} to={`/${text.toLowerCase()}`}>
               <ListItemText
                 primary={text}
-                sx={{
-                  marginTop: 5,
-                  color: '#DD761C',
-                  fontWeight: 'bold',
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: '20px', // 글씨 크기 변경
+                    marginTop: 5,
+                    color: '#DD761C',
+                    fontWeight: 'bold',
+                    textAlign: 'center'
+                  },
                 }}
               />
             </ListItemButton>

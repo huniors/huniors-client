@@ -17,8 +17,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/arms" element={<ArmsPage />} />
+        <Route path="/팔" element={<ArmsPage />} />
         <Route path="/abs" element={<AbsPage />} />
+        <Route path="/배" element={<AbsPage />} />
         <Route path="/legs" element={<LegsPage />} />
+        <Route path="/하체" element={<LegsPage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/mypage" element={<MyPage />} />
