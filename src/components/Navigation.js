@@ -83,7 +83,7 @@ function Navigation() {
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Link to="/login" style={{ textDecoration: 'none' }}>
+              <Link to="/SignIn" style={{ textDecoration: 'none' }}>
                 <Button variant="outlined" sx={{ color: '#DD761C', borderColor: '#DD761C', mr: 2 }}>
                   로그인
                 </Button>
