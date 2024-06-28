@@ -9,8 +9,8 @@ const AbsPage = () => {
 
   return (
     <div className="body-page-container">
-      {/* image-container */}
-      <div className="image-container">
+      {/* body-image-container */}
+      <div className="body-image-container">
         <img src="/images/LegsPage.png" alt="abs Exercise" className="exercise-image" />
       </div>
       <h1 className='title'>다리</h1>

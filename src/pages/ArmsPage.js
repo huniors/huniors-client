@@ -9,8 +9,8 @@ const ArmsPage = () => {
 
   return (
     <div className="body-page-container">
-      {/* image-container */}
-      <div className="image-container">
+      {/* body-image-container */}
+      <div className="body-image-container">
         <img src="/images/ArmsPage.png" alt="Arms Exercise" className="exercise-image" />
       </div>
       <h1 className='title'>팔</h1>

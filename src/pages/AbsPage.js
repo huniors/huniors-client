@@ -7,11 +7,10 @@ const AbsPage = () => {
     window.scrollTo(0, 0); // 페이지 최상단으로 스크롤
   }, []);
 
-
   return (
     <div className="body-page-container">
-      {/* image-container */}
-      <div className="image-container">
+      {/* body-image-container */}
+      <div className="body-image-container">
         <img src="/images/AbsPage.png" alt="abs Exercise" className="exercise-image" />
       </div>
       <h1 className='title'>배</h1>
