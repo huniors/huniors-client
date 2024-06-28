@@ -19,6 +19,7 @@ const drawerWidth = '10vw';
 
 function Navigation() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false); // 로그인 상태를 관리하는 상태 변수
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -26,7 +27,7 @@ function Navigation() {
 
   const list = () => (
     <Box
-      sx={{width: drawerWidth}}
+      sx={{ width: drawerWidth }}
       role="presentation"
       onClick={toggleDrawer}
     >
@@ -34,13 +35,13 @@ function Navigation() {
         {['Arms', 'Abs', 'Legs'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton component={Link} to={`/${text.toLowerCase()}`}>
-              <ListItemText 
-                  primary={text}
-                  sx={{ 
-                    marginTop : 5,
-                    color : '#DD761C', 
-                    fontWeight : 'bold',
-                  }} 
+              <ListItemText
+                primary={text}
+                sx={{
+                  marginTop: 5,
+                  color: '#DD761C',
+                  fontWeight: 'bold',
+                }}
               />
             </ListItemButton>
           </ListItem>
@@ -50,7 +51,7 @@ function Navigation() {
   );
 
   return (
-    <Box sx={{ display: 'flex', height:80}}>
+    <Box sx={{ display: 'flex', height: 80 }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -68,7 +69,7 @@ function Navigation() {
               color="inherit"
               aria-label="menu"
               onClick={toggleDrawer}
-              sx={{ mr: 2 , color: '#DD761C'}}
+              sx={{ mr: 2, color: '#DD761C' }}
             >
               <MenuIcon />
             </IconButton>
@@ -77,19 +78,37 @@ function Navigation() {
               <img src="/images/typo_logo.png" alt="typo_logo" style={{ width: 300 }} />
             </Link>
             <Box sx={{ flexGrow: 1 }} />
-            <Link to="/SignIn" style={{ textDecoration: 'none' }}>
-              <Button variant="outlined" sx={{ 
-                  width : 80,
-                  marginLeft : 10,
-                  border : 2,
-                  backgroundColor:'#FDE49E',
-                  fontWeight:'bold', 
-                  color: '#DD761C', 
-                  borderColor: '#DD761C', 
-                  mr: 2 }}>
-                로그인
-              </Button>
-            </Link>
+            {isLoggedIn ? (                                                 // 로그인 상태일 경우 마이페이지 버튼 표시
+              <Link to="/MyPage" style={{ textDecoration: 'none' }}>
+                <Button variant="outlined" sx={{
+                  width: 80,
+                  marginLeft: 10,
+                  border: 2,
+                  backgroundColor: '#FDE49E',
+                  fontWeight: 'bold',
+                  color: '#DD761C',
+                  borderColor: '#DD761C',
+                  mr: 2
+                }}>
+                  마이페이지  
+                </Button>
+              </Link>
+            ) : (                                                           // 로그인 상태가 아닐 경우 로그인 버튼 표시
+              <Link to="/SignIn" style={{ textDecoration: 'none' }}>
+                <Button variant="outlined" sx={{
+                  width: 80,
+                  marginLeft: 10,
+                  border: 2,
+                  backgroundColor: '#FDE49E',
+                  fontWeight: 'bold',
+                  color: '#DD761C',
+                  borderColor: '#DD761C',
+                  mr: 2
+                }}>
+                  로그인
+                </Button>
+              </Link>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
@@ -100,7 +119,7 @@ function Navigation() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            top: '64px', 
+            top: '64px',
           },
         }}
         variant="persistent"
