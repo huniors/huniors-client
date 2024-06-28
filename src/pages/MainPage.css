@@ -2,13 +2,6 @@
     text-align: center;
   }
   
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: yellow;
-    padding: 10px;
-  }
-  
   .body-image {
     width: 300px;
     margin-top: 20px;
