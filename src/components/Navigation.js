@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 
-const drawerWidth = 240;
+const drawerWidth = '10vw';
 
 function Navigation() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -26,7 +26,7 @@ function Navigation() {
 
   const list = () => (
     <Box
-      sx={{ width: drawerWidth }}
+      sx={{width: drawerWidth}}
       role="presentation"
       onClick={toggleDrawer}
     >
@@ -34,7 +34,14 @@ function Navigation() {
         {['Arms', 'Abs', 'Legs'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton component={Link} to={`/${text.toLowerCase()}`}>
-              <ListItemText primary={text} />
+              <ListItemText 
+                  primary={text}
+                  sx={{ 
+                    marginTop : 5,
+                    color : '#DD761C', 
+                    fontWeight : 'bold',
+                  }} 
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -43,52 +50,74 @@ function Navigation() {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height:80}}>
       <CssBaseline />
       <AppBar
         position="fixed"
+        minWidth="600px"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
           backgroundColor: 'white',
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="100vw" minWidth="600px">
           <Toolbar disableGutters>
-            <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                onClick={toggleDrawer}
-                sx={{ mr: 2, color: '#DD761C' }} // 여기서 버튼 색상을 변경
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography
-                variant="h6"
-                component={Link}
-                to="/"
-                sx={{ color: '#DD761C', textDecoration: 'none', mr: 2 }}
-              >
-                Home
-              </Typography>
-              <Typography
-                variant="h6"
-                component={Link}
-                to="/mypage"
-                sx={{ color: '#DD761C', textDecoration: 'none' }}
-              >
-                MyPage
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Link to="/SignIn" style={{ textDecoration: 'none' }}>
-                <Button variant="outlined" sx={{ color: '#DD761C', borderColor: '#DD761C', mr: 2 }}>
-                  로그인
-                </Button>
-              </Link>
-            </Box>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer}
+              sx={{ mr: 2 , color: '#DD761C'}}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              <img src="/images/typo_logo.png" alt="typo_logo" style={{ width: 300 }} />
+            </Link>
+          
+            <Typography
+              variant="h6"
+              component={Link}
+              to="/"
+              sx={{ textDecoration: 'none', 
+                    mr: 2 , 
+                    color : "#DD761C", 
+                    fontWeight : 'bold',
+                    marginLeft : 5,
+                    width : 70
+                  }}
+            >
+              Home
+            </Typography>
+            <Typography
+              variant="h6"
+              component={Link}
+              to="/mypage"
+              sx={{ color: '#DD761C', 
+                    textDecoration: 'none', 
+                    fontWeight : 'bold',
+                    marginLeft : 2,
+                    width : 70
+                  }}
+            >
+              MyPage
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <Link to="/SignIn" style={{ textDecoration: 'none' }}>
+              <Button variant="outlined" sx={{ 
+                  width : 80,
+                  marginLeft : 10,
+                  border : 2,
+                  backgroundColor:'#FDE49E',
+                  fontWeight:'bold', 
+                  color: '#DD761C', 
+                  borderColor: '#DD761C', 
+                  mr: 2 }}>
+                로그인
+              </Button>
+            </Link>
           </Toolbar>
         </Container>
       </AppBar>
@@ -99,7 +128,7 @@ function Navigation() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            top: '64px', // AppBar의 높이
+            top: '64px', 
           },
         }}
         variant="persistent"
