@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,7 +21,17 @@ const drawerWidth = '10vw';
 
 function Navigation() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false); // 로그인 상태를 관리하는 상태 변수
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  useEffect(() => {
+    axios.get('/api/checktoken')
+      .then(response => {
+        setIsLoggedIn(response.data.isLoggedIn);
+      })
+      .catch(error => {
+        console.error('로그인 상태 확인 중 오류 발생:', error);
+      });
+  }, []);
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -79,8 +91,8 @@ function Navigation() {
             </Link>
             <Box sx={{ flexGrow: 1 }} />
             {isLoggedIn ? (                                                 // 로그인 상태일 경우 마이페이지 버튼 표시
-              <Link to="/MyPage" style={{ textDecoration: 'none' }}>
-                <Button variant="outlined" sx={{
+              <Link to="/mypage" style={{ textDecoration: 'none' }}>
+                <Button sx={{
                   width: 80,
                   marginLeft: 10,
                   border: 2,
@@ -94,13 +106,13 @@ function Navigation() {
                 </Button>
               </Link>
             ) : (                                                           // 로그인 상태가 아닐 경우 로그인 버튼 표시
-              <Link to="/SignIn" style={{ textDecoration: 'none' }}>
-                <Button variant="outlined" sx={{
+              <Link to="/signin" style={{ textDecoration: 'none' }}>
+                <Button variant='outlined' sx={{
                   width: 80,
                   marginLeft: 10,
-                  border: 2,
-                  backgroundColor: '#FDE49E',
+                  border: null,
                   fontWeight: 'bold',
+                  fontSize: '17px',
                   color: '#DD761C',
                   borderColor: '#DD761C',
                   mr: 2

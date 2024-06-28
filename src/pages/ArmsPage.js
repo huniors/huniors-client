@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './BodyPage.css'; // CSS 파일 임포트
 
 const ArmsPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤
+  }, []);
+
   return (
     <div className="body-page-container">
       <div className="image-container">

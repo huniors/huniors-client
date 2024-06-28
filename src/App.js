@@ -7,6 +7,7 @@ import AbsPage from './pages/AbsPage';
 import LegsPage from './pages/LegsPage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import MyPage from './pages/MyPage';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/legs" element={<LegsPage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </Router>
   );
