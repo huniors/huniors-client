@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './BodyPage.css'; // CSS 파일 임포트
 
 const AbsPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // 페이지 최상단으로 스크롤
+  }, []);
+
+
   return (
     <div className="body-page-container">
+      {/* image-container */}
       <div className="image-container">
-        <img src="/images/abs.png" alt="abs Exercise" className="exercise-image" />
+        <img src="/images/AbsPage.png" alt="abs Exercise" className="exercise-image" />
       </div>
+      <h1 className='title'>배</h1>
+      <hr/>
+      {/* content-container */}
       <div className="content-container">
         <div className="video-container">
           <iframe 

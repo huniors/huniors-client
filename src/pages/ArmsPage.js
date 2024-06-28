@@ -9,9 +9,13 @@ const ArmsPage = () => {
 
   return (
     <div className="body-page-container">
+      {/* image-container */}
       <div className="image-container">
-        <img src="/images/rightArm.png" alt="Arms Exercise" className="exercise-image" />
+        <img src="/images/ArmsPage.png" alt="Arms Exercise" className="exercise-image" />
       </div>
+      <h1 className='title'>팔</h1>
+      <hr/>
+      {/* content-container */}
       <div className="content-container">
         <div className="video-container">
           <iframe 
