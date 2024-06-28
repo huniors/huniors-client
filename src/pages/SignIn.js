@@ -12,32 +12,59 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import BasicModal from "../components/BasicModal";
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+  const [emailErrors, setEmailErrors] = useState(true);
+  const [passwordErrors, setPasswordErrors] = useState(true);
+  const [sendData, setSendData] = useState({
+      email: "",
+      password: "",
+  });
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    setShowModal(false);
+    nav("/");
+  };
+
+  const checkEmail = (e) => {
+    var regExp =
+        /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+    setEmailErrors(!regExp.test(e.target.value));
+  };
+
+  const checkPassword = (e) => {
+    var regExp2 =
+        /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/;
+    setPasswordErrors(!regExp2.test(e.target.value));
+  };
+
+  const onchange = (e) => {
+    setSendData({
+        ...sendData,
+        [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const reponse = await.axios.post(
+        "https://my-little-pelican-58844a067eda.herokuapp.com//api/signin",
+        sendData
+      );
+
+      
+
+    } catch (err) {
+      setShowModal(true);
+    }
+    
   };
 
   return (
@@ -60,6 +87,7 @@ export default function SignIn() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
+              value={sendData.email}
               margin="normal"
               required
               fullWidth
@@ -68,8 +96,19 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              error={emailErrors && sendData.email !== ""}
+              onChange={(e) => {
+                onchange(e);
+                checkEmail(e);
+              }}
+              helperText={
+                emailErrors && sendData.email !== ""
+                  ? "이메일 형식을 지켜주세요."
+                  : null
+              }
             />
             <TextField
+              value={sendData.password}
               margin="normal"
               required
               fullWidth
@@ -78,6 +117,16 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={passwordErrors && sendData.password !== ""}
+              onChange={(e) => {
+                onchange(e);
+                checkPassword(e);
+              }}
+              helperText={
+                passwordErrors && sendData.password !== ""
+                  ? "비밀번호 형식을 지켜주세요."
+                  : null
+              }
             />
             <Button
               type="submit"
@@ -96,6 +145,12 @@ export default function SignIn() {
                 </Link>
               </Grid>
             </Grid>
+            <BasicModal
+              text={"로그인에 실패했습니다."}
+              title={"올바른 이메일과 비밀번호를 입력하세요."}
+              open={showModal}
+              closeModal={closeModal}
+            />
           </Box>
         </Box>
       </Container>

@@ -7,7 +7,7 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    axios.get('/api/checktoken')
+    axios.get('https://my-little-pelican-58844a067eda.herokuapp.com//api/checktoken')
       .then(response => {
         setIsLoggedIn(response.data.isLoggedIn);
       })
