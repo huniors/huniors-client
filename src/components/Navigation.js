@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 
-const pages = ['Home', 'Mypage'];
+const pages = ['Home', 'About'];
 
 function Navigation() {
   return (
