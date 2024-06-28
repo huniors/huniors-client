@@ -76,34 +76,6 @@ function Navigation() {
             <Link to="/" style={{ textDecoration: 'none' }}>
               <img src="/images/typo_logo.png" alt="typo_logo" style={{ width: 300 }} />
             </Link>
-          
-            <Typography
-              variant="h6"
-              component={Link}
-              to="/"
-              sx={{ textDecoration: 'none', 
-                    mr: 2 , 
-                    color : "#DD761C", 
-                    fontWeight : 'bold',
-                    marginLeft : 5,
-                    width : 70
-                  }}
-            >
-              Home
-            </Typography>
-            <Typography
-              variant="h6"
-              component={Link}
-              to="/mypage"
-              sx={{ color: '#DD761C', 
-                    textDecoration: 'none', 
-                    fontWeight : 'bold',
-                    marginLeft : 2,
-                    width : 70
-                  }}
-            >
-              MyPage
-            </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Link to="/SignIn" style={{ textDecoration: 'none' }}>
               <Button variant="outlined" sx={{ 
