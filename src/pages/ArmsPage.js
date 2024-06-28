@@ -5,7 +5,7 @@ const ArmsPage = () => {
   return (
     <div className="body-page-container">
       <div className="image-container">
-        <img src="/images/armsPelican.jpeg" alt="Arms Exercise" className="exercise-image" />
+        <img src="/images/rightArm.png" alt="Arms Exercise" className="exercise-image" />
       </div>
       <div className="content-container">
         <div className="video-container">

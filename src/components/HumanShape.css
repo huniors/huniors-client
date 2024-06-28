@@ -1,30 +1,40 @@
-  .HumanShape {
-    text-align: center;
-    background-color: #FDE49E;
-  }
-  
-  .body-image {
-    width: 300px;
-    margin-top: 20px;
-  }
-  
-  .arm-link, .abs-link, .leg-link {
-    position: absolute;
-    cursor: pointer;
-  }
-  
-  .arm-link {
-    top: 50px;
-    left: 100px;
-  }
-  
-  .abs-link {
-    top: 150px;
-    left: 100px;
-  }
-  
-  .leg-link {
-    top: 250px;
-    left: 100px;
-  }
-  
+/* MainPage.css */
+.HumanShape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.image-container {
+  position: relative;
+}
+
+.body-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.button-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.grid-button {
+  border: 1px solid transparent;
+}
+
+.button-4, .button-5, .button-6, .button-8 {
+  cursor: pointer;
+}
+
+.button-4:hover, .button-5:hover, .button-6:hover, .button-8:hover {
+  border: 1px solid #DD761C;
+}
