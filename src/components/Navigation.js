@@ -2,37 +2,18 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 
-const pages = ['Home', 'Features', 'Pricing', 'FAQs', 'About'];
+const pages = ['Home', 'MyPage'];
 
 function Navigation() {
   return (
-    <AppBar position="static" style={{ backgroundColor: '#333' }}>
+    <AppBar position="static" style={{ backgroundColor: "#333", height : 80 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-            style={{ fontFamily: 'monospace', fontWeight: 700 }}
-          >
-            LOGO
-          </Typography>
+          <img src="/images/typo_logo.png" alt="typo logo" style={{width:300}}/>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -49,7 +30,7 @@ function Navigation() {
             </Button>
           </Link>
           <Link to="/signup" style={{ textDecoration: 'none' }}>
-            <Button variant="contained" sx={{ backgroundColor: 'yellow', color: 'black' }}>
+            <Button variant="contained" sx={{ backgroundColor: '#FEB941', color: 'white' }}>
               Sign-up
             </Button>
           </Link>
