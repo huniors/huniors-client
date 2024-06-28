@@ -52,10 +52,10 @@ const ArmsPage = () => {
             ></iframe>
           </div>
           <div className="description-container">
-            <p>{video.title}</p>
             <button onClick={() => toggleLike(video.id)}>
               {isLiked(video.id) ? '❤️' : '♡'}
             </button>
+            <p>{video.title}</p>
           </div>
         </div>
       ))}

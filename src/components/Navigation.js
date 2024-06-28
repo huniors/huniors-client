@@ -89,7 +89,6 @@ function Navigation() {
             >
               <MenuIcon />
             </IconButton>
-
             <Link to="/" style={{ textDecoration: 'none' }}>
               <img src="/images/typo_logo.png" alt="typo_logo" style={{ width: 300 }} />
             </Link>
