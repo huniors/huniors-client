@@ -49,43 +49,46 @@ function Navigation() {
         position="fixed"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          backgroundColor: '#333',
+          backgroundColor: 'white',
         }}
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={toggleDrawer}
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component={Link}
-              to="/"
-              sx={{ color: 'inherit', textDecoration: 'none', mr: 2 }}
-            >
-              Home
-            </Typography>
-            <Typography
-              variant="h6"
-              component={Link}
-              to="/mypage"
-              sx={{ color: 'inherit', textDecoration: 'none' }}
-            >
-              MyPage
-            </Typography>
-            <Box sx={{ flexGrow: 1 }} />
-            <Link to="/SignIn" style={{ textDecoration: 'none' }}>
-              <Button variant="outlined" sx={{ color: 'white', borderColor: 'white', mr: 2 }}>
-                로그인
-              </Button>
-            </Link>
+            <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={toggleDrawer}
+                sx={{ mr: 2, color: '#DD761C' }} // 여기서 버튼 색상을 변경
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="h6"
+                component={Link}
+                to="/"
+                sx={{ color: '#DD761C', textDecoration: 'none', mr: 2 }}
+              >
+                Home
+              </Typography>
+              <Typography
+                variant="h6"
+                component={Link}
+                to="/mypage"
+                sx={{ color: '#DD761C', textDecoration: 'none' }}
+              >
+                MyPage
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Link to="/login" style={{ textDecoration: 'none' }}>
+                <Button variant="outlined" sx={{ color: '#DD761C', borderColor: '#DD761C', mr: 2 }}>
+                  로그인
+                </Button>
+              </Link>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
@@ -107,10 +110,14 @@ function Navigation() {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+        sx={{
+          flexGrow: 1,
+          bgcolor: 'background.default',
+          p: 3,
+          marginLeft: drawerOpen ? `${drawerWidth}px` : 0,
+          transition: 'margin-left 0.3s',
+        }}
       >
-        <Toolbar />
-        {/* Your main content goes here */}
       </Box>
     </Box>
   );
