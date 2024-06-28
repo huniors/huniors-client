@@ -16,6 +16,9 @@ const Introduction = () => {
   } else {
     return (
       <div className="introduction-container">
+        <div className="image-container">
+        <img src="/images/big_logo.png" alt="abs Exercise" className="exercise-image" />
+      </div>
         <div className="introduction-content">
           <h1>우리의 웹서비스를 소개합니다</h1>
           <p>여기에 서비스 설명을 작성합니다.</p>
