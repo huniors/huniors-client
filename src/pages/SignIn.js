@@ -1,106 +1,172 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import React from "react";
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import BasicModal from "../components/BasicModal";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#DD761C',
+    },
+  },
+});
 
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
-
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+const SignIn = () => {
+    const [emailErrors, setEmailErrors] = useState(true);
+    const [passwordErrors, setPasswordErrors] = useState(true);
+    const [sendData, setSendData] = useState({
+        email: "",
+        password: "",
     });
-  };
 
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-              </Grid>
-              <Grid item>
-                <Link to="/signup" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-  );
-}
+    const [showModal, setShowModal] = useState(false);
+
+    const nav = useNavigate();
+
+    const closeModal = () => {
+        setShowModal(false);
+        nav("/");
+    };
+
+    const onchange = (e) => {
+        setSendData({
+            ...sendData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const checkEmail = (e) => {
+        var regExp =
+            /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+        setEmailErrors(!regExp.test(e.target.value));
+    };
+
+    const checkPassword = (e) => {
+        var regExp2 =
+            /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$/;
+        setPasswordErrors(!regExp2.test(e.target.value));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                "https://open-one-meal-server-e0778adebef6.herokuapp.com/api/signin",
+                sendData
+            );
+
+            if (response.status === 200) {
+                console.log("로그인 성공, match 페이지로 이동");
+                nav("/match", {
+                    state: { userId: response.data.userId, userName: response.data.userName },
+                });
+            } else if (response.status === 401) {
+                setShowModal(true);
+            }
+        } catch (error) {
+            setShowModal(true);
+        }
+    };
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <div className="SignIn">
+                        <div className="whole">
+                            <div className="head">
+                                <h2>Log In</h2>
+                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <div className="email_textfield">
+                                    <TextField
+                                        value={sendData.email}
+                                        label="이메일"
+                                        required
+                                        name="email"
+                                        autoComplete="email"
+                                        autoFocus
+                                        margin="normal"
+                                        color="primary"
+                                        fullWidth
+                                        error={emailErrors && sendData.email !== ""}
+                                        onChange={(e) => {
+                                            onchange(e);
+                                            checkEmail(e);
+                                        }}
+                                        helperText={
+                                            emailErrors && sendData.email !== ""
+                                                ? "이메일 형식을 지켜주세요"
+                                                : null
+                                        }
+                                    />
+                                </div>
+                                <div className="password_textfield">
+                                    <TextField
+                                        value={sendData.password}
+                                        label="비밀번호"
+                                        type="password"
+                                        required
+                                        name="password"
+                                        autoComplete="current-password"
+                                        margin="normal"
+                                        color="primary"
+                                        fullWidth
+                                        error={passwordErrors && sendData.password !== ""}
+                                        onChange={(e) => {
+                                            onchange(e);
+                                            checkPassword(e);
+                                        }}
+                                        helperText={
+                                            passwordErrors && sendData.password !== ""
+                                                ? "비밀번호 형식을 지켜주세요"
+                                                : null
+                                        }
+                                    />
+                                </div>
+                                <Button
+                                    className="submit_button"
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    login
+                                </Button>
+                            </form>
+                            <Grid className="signup_link">
+                                아이디가 없으신가요? <Link to="/signup" style={{ color: '#DD761C' }}>Sign up</Link>
+                            </Grid>
+                            <BasicModal
+                                text={"로그인에 실패했습니다."}
+                                title={"올바른 이메일과 비밀번호를 입력하세요."}
+                                open={showModal}
+                                closeModal={closeModal}
+                            />
+                        </div>
+                    </div>
+                </Box>
+            </Container>
+        </ThemeProvider>
+    );
+};
+
+export default SignIn;
