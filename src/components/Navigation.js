@@ -44,7 +44,7 @@ function Navigation() {
       onClick={toggleDrawer}
     >
       <List>
-        {['MyPage', '팔', '배', '하체'].map((text) => (
+        {['MyPage', '팔', '배', '다리'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton component={Link} to={`/${text.toLowerCase()}`}>
               <ListItemText
